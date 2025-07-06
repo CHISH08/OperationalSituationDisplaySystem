@@ -1,0 +1,47 @@
+services:
+  monitoring-system:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: monitoring-system
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+      - model_weights:/app/model_weights
+      - ~/.aws:/root/.aws:ro
+    environment:
+      - PYTHONPATH=/opt/image-matching-models
+      - WEIGHTS_DIR=/app/model_weights
+      - DATASETS_DIR=/app/datasets
+    runtime: nvidia
+    networks:
+      - retrieve_network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+    networks:
+      - retrieve_network
+
+volumes:
+  qdrant_storage:
+  model_weights:
+  datasets:
+
+networks:
+  retrieve_network:
+    external: true

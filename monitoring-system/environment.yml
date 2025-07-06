@@ -1,0 +1,27 @@
+name: decision_making_env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11  # можно указать нужную версию Python
+  - numpy<2
+  - pytorch=2.1.2
+  - torchvision=0.16.2
+  - torchaudio=2.1.2
+  - pytorch-cuda=12.1
+  - pip
+  - pip:
+      - uvicorn[standard]
+      - fastapi==0.111.0
+      - qdrant-client
+      - exifread
+      - Pillow
+      - tqdm
+      - open_clip_torch
+      - transformers
+      - boto3
+      - opencv-python-headless==4.9.0.80
+      - shapely
+      - torch-cluster

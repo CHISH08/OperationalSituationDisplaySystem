@@ -1,0 +1,75 @@
+# Игнорируемые файлы и папки для ML-проекта на Python
+
+### Python ###
+# Байт-код и кэш
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Виртуальное окружение
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Распределённые Python-модули
+*.egg-info/
+*.egg
+dist/
+build/
+pip-wheel-metadata/
+
+# PyCharm и другие IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+### Данные и модели ###
+# Локальные данные и датасеты
+datasets/
+*.csv
+*.json
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.db
+*.sqlite
+
+# Модели и чекпоинты
+weights/
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.onnx
+*.tflite
+*.pb
+
+# Логи и результаты экспериментов
+logs/
+mlruns/
+wandb/
+output/
+results/
+
+### Конфиги и секреты ###
+# Файлы с настройками и ключами
+config.yml
+*.env
+*.secret
+secrets.json
+
+### Jupyter ###
+# Ноутбуки и их кэш
+.ipynb_checkpoints/
+*.ipynb
+
+# Опционально: временные файлы
+tmp/
+temp/
+
+# Дополнительные библиотеки
+image-matching-models/

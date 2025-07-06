@@ -1,0 +1,23 @@
+# Основные библиотеки
+numpy<2
+tqdm
+
+# Веб-фреймворки
+fastapi==0.111.0
+uvicorn[standard]
+
+# Дополнительные утилиты
+qdrant-client
+exifread
+Pillow
+open_clip_torch
+transformers
+boto3
+opencv-python-headless==4.9.0.80
+shapely
+yacs
+kornia
+matplotlib
+
+# PyTorch Geometric: остальные пакеты ставим из предварительно собранных колёс в Dockerfile
+# torch-cluster удалён из списка, чтобы избежать сборки из исходников в requirements.txt

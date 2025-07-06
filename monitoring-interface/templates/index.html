@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Интерактивная карта</title>
+  <!-- Подключение Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Подключение собственных стилей -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- Кнопка-гамбургер для открытия/закрытия левой панели -->
+  <button id="hamburger-btn" onclick="toggleResultsPanel()" aria-label="Открыть/закрыть панель результатов">☰</button>
+
+  <!-- Карта -->
+  <div id="map"></div>
+
+  <!-- Левая панель с результатами (по умолчанию скрыта) -->
+  <aside id="results-panel" class="hidden" aria-hidden="true">
+    <div id="results-container">
+      <!-- Результаты добавляются динамически через JS -->
+    </div>
+  </aside>
+
+  <!-- Правая панель (поисковая) -->
+  <section id="search-container">
+    <h2>Поиск</h2>
+
+    <label for="search-text">Текст для поиска:</label>
+    <input type="text" id="search-text" placeholder="Введите текст..." />
+
+    <label for="search-lat-min">Диапазон широт (Y):</label>
+    <input type="text" id="search-lat-min" placeholder="Мин. широта" />
+    <input type="text" id="search-lat-max" placeholder="Макс. широта" />
+
+    <label for="search-lng-min">Диапазон долгот (X):</label>
+    <input type="text" id="search-lng-min" placeholder="Мин. долгота" />
+    <input type="text" id="search-lng-max" placeholder="Макс. долгота" />
+
+    <label for="top-k">Количество результатов (top_k):</label>
+    <input type="number" id="top-k" placeholder="Например, 5" value="5" min="1" />
+
+    <label>Начало периода (опционально):</label>
+    <div class="datetime-row">
+      <input type="text" id="start-day" class="date-part" placeholder="дд" maxlength="2" />
+      <span class="sep">.</span>
+      <input type="text" id="start-month" class="date-part" placeholder="мм" maxlength="2" />
+      <span class="sep">.</span>
+      <input type="text" id="start-year" class="date-part" placeholder="гггг" maxlength="4" />
+      <span class="sep"> - </span>
+      <input type="text" id="start-hour" class="date-part" placeholder="чч" maxlength="2" />
+      <span class="sep">:</span>
+      <input type="text" id="start-minute" class="date-part" placeholder="мм" maxlength="2" />
+      <span class="sep">:</span>
+      <input type="text" id="start-second" class="date-part" placeholder="сс" maxlength="2" />
+    </div>
+
+    <label>Конец периода (опционально):</label>
+    <div class="datetime-row">
+      <input type="text" id="end-day" class="date-part" placeholder="дд" maxlength="2" />
+      <span class="sep">.</span>
+      <input type="text" id="end-month" class="date-part" placeholder="мм" maxlength="2" />
+      <span class="sep">.</span>
+      <input type="text" id="end-year" class="date-part" placeholder="гггг" maxlength="4" />
+      <span class="sep"> - </span>
+      <input type="text" id="end-hour" class="date-part" placeholder="чч" maxlength="2" />
+      <span class="sep">:</span>
+      <input type="text" id="end-minute" class="date-part" placeholder="мм" maxlength="2" />
+      <span class="sep">:</span>
+      <input type="text" id="end-second" class="date-part" placeholder="сс" maxlength="2" />
+    </div>
+
+    <button type="button" onclick="performSearch()">Найти</button>
+    <button type="button" onclick="switchToSatelliteView()">Спутник</button>
+    <button type="button" onclick="switchToMapView()">Карта</button>
+  </section>
+
+  <!-- Индикатор загрузки -->
+  <div id="loading" class="loading" aria-live="polite">Загрузка...</div>
+
+  <!-- Модальное окно для полноэкранного отображения изображения -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" onclick="closeModal()" aria-label="Закрыть модальное окно">&times;</button>
+    <div class="modal-content">
+      <img id="modal-image" src="" alt="Full view image" />
+    </div>
+  </div>
+
+   <!-- Подключение Leaflet JS -->
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+   <!-- Подключение AWS SDK -->
+   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1192.0.min.js"></script>
+   <!-- Подключение собственного скрипта -->
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

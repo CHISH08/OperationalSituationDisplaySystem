@@ -1,0 +1,262 @@
+/* Общие стили */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Кнопка-гамбургер в левом верхнем углу */
+#hamburger-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2001;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Левая панель с результатами */
+#results-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.85);
+    overflow-y: auto;
+    /* Позволяем растягивать только по горизонтали */
+    resize: horizontal;
+    overflow: auto; /* Нужно, чтобы полоса прокрутки появлялась при растягивании */
+    min-width: 200px;
+    max-width: 700px;
+    width: 400px;
+    /* По умолчанию скрыто */
+    display: none;
+}
+
+/* Когда панель видна, display: block */
+#results-panel.visible {
+    display: block;
+}
+
+#results-container {
+    padding: 10px;
+}
+
+/* Элемент результата */
+.result-item {
+    display: flex;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 5px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.result-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Изображения в результатах занимают ~40% контейнера, растут при растягивании */
+.result-item img {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.result-info {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+}
+
+.info-cell {
+    border: 1px solid #444;
+    padding: 4px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    font-size: 13px;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+/* Правая панель (поисковая) */
+#search-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+}
+
+#search-container h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#search-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+
+#search-container input {
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#search-container button {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+#search-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Размещение полей даты/времени в одну строку */
+.datetime-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.date-part {
+    width: 38px;
+    text-align: center;
+    margin: 0 2px;
+    border: 1px solid #444;
+    border-radius: 5px;
+}
+
+.sep {
+    color: #aaa;
+    margin: 0 2px;
+    font-weight: bold;
+}
+
+/* Подсветка поля при ошибочном вводе */
+.error {
+    border: 2px solid red !important;
+}
+
+/* Стили для всплывающих окон (popup) Leaflet */
+/* Переносим зум-контрол в левый нижний угол */
+.leaflet-control-zoom {
+    left: 10px !important;
+    bottom: 10px !important;
+    top: auto !important;
+}
+
+.leaflet-popup-content {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.leaflet-popup-content img {
+    display: block;
+    max-width: 220px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #222 !important;
+    border: 1px solid #555 !important;
+    border-radius: 8px !important;
+}
+
+.leaflet-popup-tip {
+    background: #222 !important;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+.modal-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+/* Индикатор загрузки */
+.loading {
+    display: none;
+    position: fixed;
+    z-index: 6000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 18px;
+}

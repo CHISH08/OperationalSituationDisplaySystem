@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  monitoring-interface:
+    build: .
+    container_name: monitoring-interface
+    ports:
+      - "8333:8333"
+    volumes:
+      - ~/.aws:/root/.aws:ro
+      - ../monitoring-system/datasets:/app/datasets:ro
+    networks:
+      - retrieve_network
+
+networks:
+  retrieve_network:
+    external: true
+    # driver: bridge
+    # name: retrieve_network
